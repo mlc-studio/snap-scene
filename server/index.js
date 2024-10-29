@@ -138,8 +138,10 @@ io.on('connection', (socket) => {
                     }
                 }
 
-                lobby.gameState.players = lobby.players;
-                io.to(lobby.code).emit('lobby_player_left', lobby);
+                if (lobby.gameState) {
+                    lobby.gameState.players = lobby.players;
+                    io.to(lobby.code).emit('lobby_player_left', lobby);
+                }
             }
         });
     });
